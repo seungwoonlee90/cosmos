@@ -22,14 +22,18 @@ def start():
             except :
                 df = pd.read_csv(file)
                 print('utf-8')
-            df = round(df.describe().T.reset_index(),3)
+
+            #check this --> os.environ.get('secret_key')
+
             columns = df.columns.to_list()
             myList = df.values.tolist()
+
     return render_template('result.html', columns=columns, myList=myList)
 
 @app.route('/')
 def main():
     value = "hello world!"
+    print(os.environ.get("SECRET_KEY"))
     return render_template('index.html', value=value)
 
 port = 9000
