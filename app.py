@@ -2,6 +2,7 @@ import os
 import sys
 import webbrowser
 import pandas as pd
+import requests
 from flask import Flask, request, render_template
 
 if getattr(sys, 'frozen', False):
@@ -23,8 +24,6 @@ def start():
                 df = pd.read_csv(file)
                 print('utf-8')
 
-            #check this --> os.environ.get('secret_key')
-
             columns = df.columns.to_list()
             myList = df.values.tolist()
 
@@ -33,7 +32,10 @@ def start():
 @app.route('/')
 def main():
     value = "hello world!"
-    print(os.environ.get("SECRET_KEY"))
+    key = app.config.from_pyfile('config.py')
+    url = f'http://apis.data.go.kr/1613000/BusSttnInfoInqireService/getCtyCodeList?serviceKey={key}' #test용 공공데이터 url
+    print(requests.get(url))
+
     return render_template('index.html', value=value)
 
 port = 9000

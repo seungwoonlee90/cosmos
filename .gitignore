@@ -1,2 +1,4 @@
 venv/
 .env
+.bash_profile
+config.py
