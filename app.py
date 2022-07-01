@@ -23,7 +23,8 @@ def start():
             except :
                 df = pd.read_csv(file)
                 print('utf-8')
-
+            
+            df = df.describe(include='all')
             columns = df.columns.to_list()
             myList = df.values.tolist()
 
